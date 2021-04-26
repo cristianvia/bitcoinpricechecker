@@ -17,5 +17,5 @@ cd bitcoinpricechecker
 ```
 chromium-browser precioBitcoin.html
 ```
-* Automáticamente se abrirá la web con el precio de Bitcoin. Si quieres cambiar el color de fondo, solo debes hacer click en la pantalla
-* Si haces click, también se pondrá en pantalla completa. Alternativamente puedes apretar F11
+* Automáticamente se abrirá la web con el precio de Bitcoin. Si aprietas F11 se pondrá en pantalla completa
+* Si haces click, cambiará de color y también se pondrá en pantalla completa
