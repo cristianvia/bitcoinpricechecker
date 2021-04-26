@@ -1,0 +1,61 @@
+<div id="wrapper">
+    <h1>Precio de BITCOIN</h1>
+    <div id="btc"></div>
+</div>
+
+<style>
+    #wrapper {
+        font-size: 1em;
+        font-family: arial;
+        margin: 20px auto;
+        width: 450px;
+        color: green;
+        text-align: center;
+    }
+
+    #btc {
+        font-size: 6em;
+    }
+</style>
+
+<script>
+    function showPrice() {
+        var currentPrice = new XMLHttpRequest();
+
+        currentPrice.open('GET', 'https://api.gdax.com/products/BTC-USD/book', true);
+        currentPrice.onreadystatechange = function () {
+            if (currentPrice.readyState == 4) {
+                var ticker = JSON.parse(currentPrice.responseText);
+                var price = ticker.bids[0][0];
+                var oldPrice = localStorage.getItem('oldPrice');
+                if (oldPrice != null) {
+                    if (oldPrice > price) {
+                        document.getElementById('btc').style.color = "red"
+                    } else {
+                        document.getElementById('btc').style.color = "green"
+                    }
+                }
+                localStorage.setItem('oldPrice', price);
+                document.getElementById('btc').innerHTML = "$" + price;
+            };
+        };
+
+        currentPrice.send();
+    }
+
+    showPrice();
+
+    setInterval(function () {
+        showPrice();
+    }, 3000);
+
+    //Switch day/night mode
+
+    const colors = ['black', 'white'];
+    let colorIndex = 0;
+
+    document.body.addEventListener('click', () => {
+        document.body.style.backgroundColor = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length
+    });
+</script>
